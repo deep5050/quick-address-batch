@@ -1,0 +1,13 @@
+@echo off
+
+SET /P ip=enter new IP address :
+SET /P mask=enter subnet mask :
+SET /P gateway=enter default gateway :
+SET /P dns1=enter primary DNS address :
+SET /P dns2=enter alternate DNS address
+
+netsh interface ipv4 set adress "Ethernet" static %ip% %mask% %gateway%
+netsh interface ipv4 set dns "Ethernet" static %dns1%
+netsh interface ipv4 add dns "Ethernet" index=2 %dns2%
+
+echo "success"

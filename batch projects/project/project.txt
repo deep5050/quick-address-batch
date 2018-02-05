@@ -1,0 +1,29 @@
+@echo off
+echo 1.OpenDns (default)
+echo 2.AdGuard (default)
+echo 3.AdGuard ( Family Protection)
+echo 4.Google
+echo 5.Level 3 Dns
+echo 6.DNS.WATCH
+echo 7.OpenNIC
+echo 8.norton(default)
+echo 9.Norton (pornography protection)
+echo 10.Norton(pornography + malware protection)
+
+SET /P user=please enter your choice
+IF %user% == 1 GOTO :opendns
+IF %user% == 2 GOTO :adguardDefault
+:opendns
+SET primaryDns=208.67.222.222
+SET alternateDns=208.67.220.220
+GOTO :changeDns
+
+:adguardDefault
+SET primaryDns=176.103.130.130
+SET alternateDns=176.103.130.131
+GOTO :changeDns
+
+:changeDns
+netsh interface ipv4 set dns "Wi-Fi" static %primarydns% 
+netsh interface ipv4 add dns "Wi-Fi" index=2 %alternateDns%
+pause
